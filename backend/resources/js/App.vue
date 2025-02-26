@@ -1,17 +1,14 @@
 <template>
-  <div>
-    <header>
+  <div id="app">
+    <header class="header">
       <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/add">Add Item</router-link>
-        <router-link to="/clothing-items">Clothing Items</router-link>
-        <router-link to="/logout" @click.native="logout">Logout</router-link>
+        <router-link to="/" class="nav-link">Home</router-link>
+        <router-link to="/stylists" class="nav-link">Stylists</router-link>
+        <router-link to="/shared-wardrobes" class="nav-link">Share Wardrobe</router-link>
+        <router-link to="/logout" class="nav-link" @click.native="logout">Logout</router-link>
       </nav>
     </header>
-    <router-view></router-view>
-    <footer>
-      <p>&copy; 2025 Wardrobe Management System</p>
-    </footer>
+    <router-view />
   </div>
 </template>
 
@@ -35,19 +32,19 @@ body {
   box-sizing: border-box;
 }
 
-header, footer {
-  background-color: #f8f9fa;
-  padding: 1rem;
+.header {
+  background-color: white;
+  padding: 10px;
   text-align: center;
 }
 
-nav a {
-  margin: 0 1rem;
+.nav-link {
+  margin-right: 15px;
+  color: blue;
   text-decoration: none;
-  color: #007bff;
 }
 
-nav a:hover {
+.nav-link:hover {
   text-decoration: underline;
 }
 
@@ -74,7 +71,7 @@ button:hover {
 }
 
 @media (max-width: 600px) {
-  nav a {
+  .nav-link {
     display: block;
     margin: 0.5rem 0;
   }

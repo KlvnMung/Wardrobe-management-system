@@ -1,15 +1,14 @@
 <template>
   <div class="container">
     <h1>Login</h1>
-    <form @submit.prevent="login" class="form-container">
+    <form @submit.prevent="login">
       <div>
         <label>Email:</label>
-        <input v-model="email" type="email" required autocomplete="username">
+        <input v-model="email" type="email" required>
       </div>
       <div>
         <label>Password:</label>
-        <input :type="showPassword ? 'text' : 'password'" v-model="password" required autocomplete="current-password">
-        <button type="button" @click="toggleShowPassword">{{ showPassword ? 'Hide' : 'Show' }} Password</button>
+        <input v-model="password" type="password" required>
       </div>
       <button type="submit">Login</button>
     </form>
@@ -24,14 +23,10 @@ export default {
   data() {
     return {
       email: '',
-      password: '',
-      showPassword: false
+      password: ''
     };
   },
   methods: {
-    toggleShowPassword() {
-      this.showPassword = !this.showPassword;
-    },
     login() {
       axios.post('/login', {
         email: this.email,

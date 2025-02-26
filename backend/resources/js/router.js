@@ -5,6 +5,8 @@ import EditClothingItem from './components/EditClothingItem.vue';
 import LandingPage from './components/LandingPage.vue';
 import Login from './components/Auth/Login.vue';
 import Register from './components/Auth/Register.vue';
+import StylistList from './components/StylistList.vue';
+import SharedWardrobeList from './components/SharedWardrobeList.vue';
 
 const routes = [
   { path: '/', component: LandingPage },
@@ -13,6 +15,8 @@ const routes = [
   { path: '/clothing-items', component: ClothingItemList, meta: { requiresAuth: true } },
   { path: '/add', component: AddClothingItem, meta: { requiresAuth: true } },
   { path: '/edit/:id', component: EditClothingItem, meta: { requiresAuth: true } },
+  { path: '/stylists', component: StylistList, meta: { requiresAuth: true } },
+  { path: '/shared-wardrobes', component: SharedWardrobeList, meta: { requiresAuth: true } },
   { path: '/logout', beforeEnter: (to, from, next) => {
       localStorage.removeItem('auth');
       next('/login');

@@ -25,6 +25,7 @@ cp .env.example .env
 php artisan migrate
 6.Start the development server:
 php artisan serve
+7.Ensure ampps/xampps is running.
 Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 

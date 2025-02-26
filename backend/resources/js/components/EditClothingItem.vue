@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Add Clothing Item</h1>
-    <form @submit.prevent="addItem">
+    <h1>Edit Clothing Item</h1>
+    <form @submit.prevent="updateItem">
       <div>
         <label>Name:</label>
         <input v-model="name" required>
@@ -18,7 +18,7 @@
         <label>Color:</label>
         <input v-model="color" required>
       </div>
-      <button type="submit">Add Item</button>
+      <button type="submit">Update Item</button>
     </form>
   </div>
 </template>
@@ -35,20 +35,33 @@ export default {
       color: ''
     };
   },
+  created() {
+    this.fetchItem();
+  },
   methods: {
-    addItem() {
-      axios.post('/clothing-items', {
+    fetchItem() {
+      axios.get(`/clothing-items/${this.$route.params.id}`)
+        .then(response => {
+          const item = response.data;
+          this.name = item.name;
+          this.category = item.category;
+          this.size = item.size;
+          this.color = item.color;
+        });
+    },
+    updateItem() {
+      axios.put(`/clothing-items/${this.$route.params.id}`, {
         name: this.name,
         category: this.category,
         size: this.size,
         color: this.color
       })
       .then(response => {
-        alert('Item added successfully!');
+        alert('Item updated successfully!');
         this.$router.push('/clothing-items');
       })
       .catch(error => {
-        console.error("There was an error adding the item:", error);
+        console.error("There was an error updating the item:", error);
       });
     }
   }

@@ -1,10 +1,23 @@
-* text=auto eol=lf
+# Set the default behavior to automatically normalize line endings
+* text=auto
 
-*.blade.php diff=html
-*.css diff=css
-*.html diff=html
-*.md diff=markdown
-*.php diff=php
+# Explicitly declare text files you want to always be normalized and converted to LF upon checkout
+*.js text eol=lf
+*.vue text eol=lf
+*.php text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+
+# Binary files should be left untouched
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
 
 /.github export-ignore
 CHANGELOG.md export-ignore

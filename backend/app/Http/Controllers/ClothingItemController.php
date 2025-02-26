@@ -9,46 +9,57 @@ class ClothingItemController extends Controller
 {
     public function index()
     {
-        return ClothingItem::all();
+        $items = ClothingItem::all();
+        return response()->json($items);
+    }
+
+    public function create()
+    {
+        return view('clothing-items.create');
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'size' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'size' => 'required',
+            'color' => 'required',
         ]);
 
-        $clothingItem = ClothingItem::create($validatedData);
+        ClothingItem::create($request->all());
 
-        return response()->json($clothingItem, 201);
+        return response()->json(['message' => 'Clothing item created successfully.']);
     }
 
     public function show(ClothingItem $clothingItem)
     {
-        return $clothingItem;
+        return response()->json($clothingItem);
+    }
+
+    public function edit(ClothingItem $clothingItem)
+    {
+        return view('clothing-items.edit', compact('clothingItem'));
     }
 
     public function update(Request $request, ClothingItem $clothingItem)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'size' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'size' => 'required',
+            'color' => 'required',
         ]);
 
-        $clothingItem->update($validatedData);
+        $clothingItem->update($request->all());
 
-        return response()->json($clothingItem, 200);
+        return response()->json(['message' => 'Clothing item updated successfully.']);
     }
 
     public function destroy(ClothingItem $clothingItem)
     {
         $clothingItem->delete();
 
-        return response()->noContent();
+        return response()->json(['message' => 'Clothing item deleted successfully.']);
     }
 }

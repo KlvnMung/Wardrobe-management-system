@@ -21,7 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('clothing-items', ClothingItemController::class);
+// Authentication routes provided by Laravel Breeze
+require __DIR__.'/auth.php';
+
+// Clothing item routes
+Route::resource('clothing-items', ClothingItemController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -32,5 +36,3 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__.'/auth.php';
